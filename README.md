@@ -12,3 +12,14 @@
 ## 使用说明
 1. 下载解压，打开Chrome的开发者模式，然后加载已解压的拓展程序即可
 ![](https://yupic.oss-cn-shanghai.aliyuncs.com/20220915192417.png)
+
+## 怎么改Chrome插件源码
+1. 查看插件id,获取到本地文件夹路径  
+`C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Default\Extensions\micdllihgoppmejpecmkilggmaagfdmb`  
+路径的最后一段就是插件id  
+![](https://yupic.oss-cn-shanghai.aliyuncs.com/20220915193154.png)
+
+2. 然后用VSCode打开文件夹，修改源码后，再修改一下manifest.json的key和name即可，可以保留原有的插件，两个同时存在
+![](https://yupic.oss-cn-shanghai.aliyuncs.com/20220915193435.png)
+
+
