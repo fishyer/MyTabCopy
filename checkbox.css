@@ -1,0 +1,80 @@
+    .tcy-checkbox {
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .tcy-checkbox > input[type=checkbox] {
+        position: absolute;
+        z-index: -1000;
+        left: 10px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+    }
+    
+    .tcy-checkbox-back {
+        display: inline-block;
+        position: relative;
+        width: 59px;
+        height: 27px;
+        transition: background-color 200ms;
+        background-color: hsl(0, 0%, 74%);
+        cursor: pointer;
+        border-radius: 1px;
+        vertical-align: middle;
+    }
+    
+    .tcy-checkbox-fore {
+        position: absolute;
+        background-color: #fff;
+        width: 25px;
+        height: 23px;
+        /*border-radius: 1px;*/
+        top: 2px;
+        left: 2px;
+        transition: left 100ms;
+    }
+    
+    .tcy-checkbox > input[type=checkbox]:focus + label .tcy-checkbox-back {
+        /*outline: hsl(0, 0%, 55%) solid 3px;*/
+        /*outline: hsl(320, 91%, 39%) solid 3px;*/
+        /*outline: hsl(205, 100%, 65%) solid 3px;*/
+        /*background-color: hsl(205, 100%, 83%);*/
+        background-color: hsl(0, 0%, 60%);
+    }
+    
+      .tcy-checkbox > input[type=checkbox]:focus:checked + label .tcy-checkbox-back {
+        /*outline: hsl(0, 0%, 55%) solid 3px;*/
+        /*outline: hsl(320, 91%, 39%) solid 3px;*/
+        /*outline: hsl(205, 100%, 65%) solid 3px;*/
+        /*background-color: hsl(205, 100%, 62%);*/
+        background-color: #000;
+    }
+
+    .tcy-checkbox > input[type=checkbox]:checked + label .tcy-checkbox-fore {
+        left: 32px;
+    }
+    
+    .tcy-checkbox > input[type=checkbox]:checked + label .tcy-checkbox-back {
+        /*background-color: hsl(320, 72%, 47%);*/
+        background-color: hsl(0, 0%, 30%);
+    }
+    
+    .tcy-checkbox > input[type=checkbox]:disabled + label .tcy-checkbox-back {
+        background-color: hsl(0, 0%, 86%);
+        border-color: hsl(0, 0%, 86%);
+    }
+    
+    label {
+        -webkit-user-select: none;
+        display: inline-block;
+    }

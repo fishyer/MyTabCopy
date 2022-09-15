@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>TabCopy Options</title>
+    <style type="text/css">
+    ::selection {
+        background-color: hsl(205, 100%, 65%);
+        color: #fff;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, helvetica, sans-serif;
+        margin: 0;
+        text-align: center;
+        font-size: 16px;
+        background-color: hsl(0, 0%, 92%);
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    
+    select,
+    input {
+        vertical-align: middle;
+        border: none;
+        height: 33px;
+        padding: 0 10px;
+        font-size: 16px;
+        xbackground-color: #E4F2FF;
+        xcolor: #2B9DFF;
+        xcolor: hsl(200, 92%, 39%);
+        color: hsl(0, 0%, 17%);
+    }
+    
+    select:focus,
+    input:focus {
+        outline: hsl(0, 0%, 55%) solid 3px;
+        outline: hsl(320, 91%, 39%) solid 3px;
+        outline: hsl(205, 100%, 65%) solid 3px;
+        background-color: #fff !important;
+    }
+    
+    select:hover {
+        background-color: #fff !important;
+    }
+    
+    a {
+        color: hsl(0, 0%, 31%);
+    }
+    
+    #user-message {
+        position: relative;
+        height: 0;
+        background-color: hsl(0, 0%, 17%);
+        transition: height 300ms;
+        /*box-shadow: inset 0 -20px 26px 2px #222;*/
+        width: calc(100% + 15px);
+        overflow: hidden;
+        color: hsl(0, 0%, 73%);
+        font-size: 0;
+    }
+    
+    #close-user-message {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        background-image: url(img/x4.png);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    #close-user-message:hover {
+        background-color: #373737;
+    }
+    
+    #shortcut-key {
+        display: inline-block;
+        font-size: 16px;
+        color: hsl(0, 0%, 31%);
+        text-decoration: underline;
+        cursor: pointer;
+        vertical-align: top;
+    }
+    
+    #shortcut-key-description {
+        display: inline-block;
+        font-size: 14px;
+        color: hsl(0, 0%, 56%);
+        line-height: initial;
+        vertical-align: top;
+        padding: 8px 50px 0;
+    }
+    
+    .logo {
+        vertical-align: middle;
+    }
+    
+    .page-title {
+        vertical-align: middle;
+        font-size: 26px;
+        margin-left: 20px;
+        color: #fff;
+    }
+    
+    .option-label {
+        display: inline-block;
+        margin-right: 20px;
+        text-align: left;
+        white-space: nowrap;
+        font-size: 16px;
+        vertical-align: middle;
+        color: hsl(0, 0%, 29%);
+    }
+    
+    .tab {
+        display: inline-block;
+        height: 42px;
+        /* background: hsl(271, 76%, 53%); */
+        vertical-align: middle;
+        width: 400px;
+        line-height: 35px;
+        color: hsl(0, 0%, 100%);
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 17px;
+        border-bottom: 8px solid hsla(0, 0%, 0%, 0)
+    }
+    
+    .tab:hover {
+        border-color: hsl(320, 92%, 28%);
+    }
+    
+    .tabs {
+        margin-top: 70px;
+        text-align: center;
+        -webkit-user-select: none;
+        xbox-shadow: 0 7px 7px 0 hsla(0, 0%, 0%, 0.16), 0 7px 7px 0 hsla(0, 0%, 0%, 0.12);
+        font-size: 0;
+    }
+    
+    .head {
+        font-weight: 100;
+        padding-top: 70px;
+        background-color: hsl(320, 91%, 39%);
+        overflow: hidden;
+        width: calc(100% + 15px);
+    }
+    
+    .mode-description-box {
+        height: 135px;
+        background-color: hsl(0, 0%, 17%);
+        color: hsl(0, 0%, 73%);
+        -webkit-user-select: none;
+        overflow: hidden;
+        width: calc(100% + 15px);
+    }
+    
+    .mode-description {
+        display: inline-block;
+        position: relative;
+        width: 800px;
+        height: 100%;
+        text-align: center;
+    }
+    
+    .mode-description-overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+    
+    .mode-description > div {
+        background-color: hsl(0, 0%, 17%);
+        width: 100%;
+        height: 100%;
+        transition: opacity 400ms;
+        font-size: 0;
+    }
+    
+    .mode-description-text {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 31px;
+        font-size: 16px;
+    }
+    
+    .icon {
+        background-image: url(img/icon16.png);
+        width: 21px;
+        height: 16px;
+        display: inline-block;
+        background-position-x: 50%;
+        background-repeat: no-repeat;
+        transform: translateY(3px);
+    }
+    
+    #tab-indicator {
+        position: absolute;
+        height: 8px;
+        background-color: hsl(320, 92%, 86%);
+        left: 0;
+        bottom: 0;
+        width: 400px;
+        transition: left 200ms;
+    }
+    
+    #head-tabs {
+        width: 800px;
+        display: inline-block;
+        position: relative;
+        white-space: nowrap;
+    }
+    
+    .options-box {
+        /*position: absolute;*/
+        /*width: 100%;*/
+        /*bottom: 100px;*/
+        /*top: 414px;*/
+        /*overflow-y: scroll;*/
+        /*overflow-x: hidden;*/
+        padding-top: 15px;
+        padding-bottom: 120px;
+        font-size: 0;
+        width: calc(100% + 15px);
+    }
+    
+    ::-webkit-scrollbar {
+        background-color: transparent;
+        width: 15px;
+    }
+    
+    ::-webkit-scrollbar-button {
+        display: none;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: hsl(0, 0%, 65%);
+    }
+    
+    .footer {
+        height: 94px;
+        color: #fff;
+        background-color: hsl(0, 0%, 17%);
+        /*position: absolute;*/
+        position: fixed;
+        /*width: 100%;*/
+        bottom: 0;
+        text-align: left;
+        width: calc(100% + 15px);
+    }
+    
+    .footer > div {
+        display: inline-block;
+        height: 100%;
+        padding: 0 30px;
+        cursor: pointer;
+    }
+    
+    .footer > div:hover {
+        background-color: #000;
+    }
+    
+    .footer > div > span {
+        vertical-align: middle;
+        display: inline-block;
+    }
+    
+    .option {
+        line-height: 33px;
+        margin-top: 13px;
+        position: relative;
+    }
+    
+    .option-general {
+        line-height: 33px;
+        margin-top: 11px;
+        position: relative;
+    }
+    
+    .option-label-general {
+        font-size: 16px;
+        vertical-align: middle;
+        color: hsl(0, 0%, 29%);
+        white-space: nowrap;
+    }
+    
+    .options-section-head {
+        text-align: center;
+    }
+    
+    .options-section-head-inner {
+        font-size: 24px;
+        color: hsl(320, 92%, 39%);
+        font-weight: 100;
+        text-transform: uppercase;
+        padding-left: 200px;
+        vertical-align: middle;
+        line-height: 67px;
+        height: 55px;
+        display: inline-block;
+        width: 1150px;
+        text-align: left;
+    }
+    
+    .tab-selected {
+        cursor: initial;
+    }
+    </style>
+    <link rel="stylesheet" href="checkbox.css">
+    <link rel="stylesheet" href="options_section_copy_format.css">
+</head>
+
+<body style="display:none;">
+    <div id="user-message">
+        <button id="close-user-message"></button>
+        <div style="display: inline-block; height: 100%; text-align: center;">
+            <div style="height:100%;width:100%;">
+                <span style="display:inline-block;height:100%;vertical-align: middle;"></span>
+                <span style="display: inline-block; vertical-align: middle; line-height: 31px; line-height: 43px; font-size: 20px; font-weight: 100;">TabCopy now has a Fancy Mode that lets you select a format when you're copying tabs.<br>Try it out by selecting and customizing it below.<br>You can always switch back to the familiar Simple Mode if Fancy Mode is not your cup of tea.</span>
+            </div>
+        </div>
+    </div>
+    <div class="head">
+        <a href="http://tabcopy.com/" target="_blank"><img class="logo" src="img/logo_options.png"></a>
+        <span class="page-title">TabCopy Options</span>
+        <div class="tabs">
+            <div id="head-tabs">
+                <div id="tab-simple-mode" class="tab tab-selected">Simple Mode</div>
+                <div id="tab-fancy-mode" class="tab">Fancy Mode</div>
+                <div id="tab-indicator"></div>
+            </div>
+        </div>
+    </div>
+    <div class="mode-description-box">
+        <div class="mode-description">
+            <div id="mode-description-simple">
+                <span style="display:inline-block;height:100%;vertical-align: middle;"></span>
+                <!-- <span class="mode-description-text">Select a format to be applied to copied tabs when clicking the TabCopy toolbar icon.<br>Single clicking <span class="icon"></span> copies the selected tab<span style="width:41px;display:inline-block;">&#x2022;</span>Double clicking <span class="icon"></span> copies all tabs in the window -->
+                <span class="mode-description-text">Single clicking <span class="icon"></span> copies the selected tab<span style="width:41px;display:inline-block;">&#x2022;</span>Double clicking <span class="icon"></span> copies all tabs in the window
+                <br>Triple clicking <span class="icon"></span> copies all tabs in all windows</span>
+            </div>
+            <div id="mode-description-fancy" style="position:absolute;top:0;">
+                <span style="display:inline-block;height:100%;vertical-align: middle;"></span>
+                <!-- <span class="mode-description-text">Fancy mode has multiple copy formats and provides a way to open tabs from clipboard text.<br>Click <span class="icon"></span> to open a popup that lets you copy tabs with a choice of format -->
+                <!-- <br>or open a list of tabs that have been copied to the clipboard.</span> -->
+                <!-- <span class="mode-description-text">Set up multiple formats to choose from when copying tabs.<br>Clicking <span class="icon"></span> opens a popup letting you select a format -->
+                <span class="mode-description-text">Clicking <span class="icon"></span> opens a popup that lets you select the range of tabs to copy
+                <br>and the format to use</span>
+            </div>
+            <div class="mode-description-overlay"></div>
+        </div>
+    </div>
+    <div id="options-box" class="options-box">
+        <div class="options-section">
+            <div class="options-section-head">
+                <div class="options-section-head-inner">General</div>
+            </div>
+            <div class="options-section-left">
+                <div class="options-section-left-inner">
+                    <div class="option-general">
+                        <span class="option-label-general">Copy confirmation</span>
+                    </div>
+                    <div class="option-general option-ignore-pinned-tabs">
+                        <span class="option-label-general">Ignore pinned tabs</span>
+                    </div>
+                    <div class="option-general">
+                        <span class="option-label-general">Show in context menu</span>
+                    </div>
+                    <div class="option-general">
+                        <span class="option-label-general">Shortcut key</span>
+                    </div>
+                </div>
+            </div>
+            <div class="options-section-right">
+                <div class="options-section-right-inner">
+                    <div class="option-general">
+                        <select id="copy-notification">
+                            <option value="toaster">Popup</option>
+                            <option value="badge">Icon</option>
+                            <option value="both">Both</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                    <div class="option-general option-ignore-pinned-tabs">
+                        <div class="tcy-checkbox"><input type="checkbox" id="ignore-pinned-tabs" name="ignore-pinned-tabs" /><label for="ignore-pinned-tabs"><div class="tcy-checkbox-back"><div class="tcy-checkbox-fore"></div></div></label></div>
+                    </div>
+                    <div class="option-general">
+                        <div class="tcy-checkbox"><input type="checkbox" id="show-in-context-menu" name="show-in-context-menu" /><label for="show-in-context-menu"><div class="tcy-checkbox-back"><div class="tcy-checkbox-fore"></div></div></label></div>
+                    </div>
+                    <div class="option-general">
+                        <div id="shortcut-key" title="Click to change"></div>
+                        <div id="shortcut-key-description">hit once to copy selected tab
+                            <br>hit twice to copy all tabs in the window
+                            <br>hit three times to copy all tabs in all windows</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="options-separator"></div>
+        <div id="mode-options-simple" style="display:none;">
+            <div class="options-section">
+    <div class="options-section-head">
+        <div class="options-section-head-inner">Format</div>
+    </div>
+    <div class="options-section-left">
+        <div class="options-section-left-inner">
+            <div>
+                <span class="option-label">Format</span>
+                <select id="simple-copy-format">
+                    
+                    <option value="url"></option>
+                    <option value="compact"></option>
+                    <option value="expanded"></option>
+                    <option value="link"></option>
+                    <option value="markdown"></option>
+                    <option value="bbcode"></option>
+                    <option value="csv"></option>
+                    <option value="json"></option>
+                    <option value="html"></option>
+                    <option value="html-table">HTML </option>
+                    <option value="custom"></option>
+                </select>
+            </div>
+            <div>
+                <div id="simple-compact-options" class="copy-format-suboptions">
+                    <span class="option-label">Separator</span>
+                    <input id="simple-compact-separator" type="text" style="width:50px;">
+                </div>
+                <div id="simple-custom-options" class="copy-format-suboptions">
+                    <div style="display:inline-block;white-space:nowrap;">
+                        <div>
+                            <span class="option-label">Name</span>
+                            <input id="simple-custom-name" type="text" spellcheck="false" style="width:160px;">
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List Start</span>
+                            <input id="simple-custom-start" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab</span>
+                            <input id="simple-custom-tab" type="text" spellcheck="false" style="width:295px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab title</span><span class="token">[title]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url</span><span class="token">[url]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab link</span><span class="token">[link]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab url schema</span><span class="token">[schema]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url host</span><span class="token">[host]</span>
+                                        </div>
+                                        <!--                         <div>
+                            <span>tab url sub-domain</span><span class="token">[sub-domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url domain</span><span class="token">[domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url tld</span><span class="token">[tld]</span>
+                        </div> -->
+                                        <div>
+                                            <span>Tab url path</span><span class="token">[path]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url query</span><span class="token">[query]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url hash</span><span class="token">[hash]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab number</span><span class="token">[#]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab Delimiter</span>
+                            <input id="simple-custom-delimiter" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List End</span>
+                            <input id="simple-custom-end" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="simple-html-table-options" class="copy-format-suboptions">
+                    <span class="option-label">Include header</span>
+                    <div class="tcy-checkbox"><input type="checkbox" id="simple-html-table-include-header" name="simple-html-table-include-header" /><label for="simple-html-table-include-header"><div class="tcy-checkbox-back"><div class="tcy-checkbox-fore"></div></div></label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="options-section-right">
+        <div class="options-section-right-inner">
+            <div id="simple-copy-format-options-preview" class="copy-format-options-preview"></div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div id="mode-options-fancy" style="display:none;">
+            <div class="options-section">
+    <div class="options-section-head">
+        <div class="options-section-head-inner">First format</div>
+    </div>
+    <div class="options-section-left">
+        <div class="options-section-left-inner">
+            <div>
+                <span class="option-label">Format</span>
+                <select id="fancy-0-copy-format">
+                    
+                    <option value="url"></option>
+                    <option value="compact"></option>
+                    <option value="expanded"></option>
+                    <option value="link"></option>
+                    <option value="markdown"></option>
+                    <option value="bbcode"></option>
+                    <option value="csv"></option>
+                    <option value="json"></option>
+                    <option value="html"></option>
+                    <option value="html-table">HTML </option>
+                    <option value="custom"></option>
+                </select>
+            </div>
+            <div>
+                <div id="fancy-0-compact-options" class="copy-format-suboptions">
+                    <span class="option-label">Separator</span>
+                    <input id="fancy-0-compact-separator" type="text" style="width:50px;">
+                </div>
+                <div id="fancy-0-custom-options" class="copy-format-suboptions">
+                    <div style="display:inline-block;white-space:nowrap;">
+                        <div>
+                            <span class="option-label">Name</span>
+                            <input id="fancy-0-custom-name" type="text" spellcheck="false" style="width:160px;">
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List Start</span>
+                            <input id="fancy-0-custom-start" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab</span>
+                            <input id="fancy-0-custom-tab" type="text" spellcheck="false" style="width:295px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab title</span><span class="token">[title]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url</span><span class="token">[url]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab link</span><span class="token">[link]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab url schema</span><span class="token">[schema]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url host</span><span class="token">[host]</span>
+                                        </div>
+                                        <!--                         <div>
+                            <span>tab url sub-domain</span><span class="token">[sub-domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url domain</span><span class="token">[domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url tld</span><span class="token">[tld]</span>
+                        </div> -->
+                                        <div>
+                                            <span>Tab url path</span><span class="token">[path]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url query</span><span class="token">[query]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url hash</span><span class="token">[hash]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab number</span><span class="token">[#]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab Delimiter</span>
+                            <input id="fancy-0-custom-delimiter" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List End</span>
+                            <input id="fancy-0-custom-end" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fancy-0-html-table-options" class="copy-format-suboptions">
+                    <span class="option-label">Include header</span>
+                    <div class="tcy-checkbox"><input type="checkbox" id="fancy-0-html-table-include-header" name="fancy-0-html-table-include-header" /><label for="fancy-0-html-table-include-header"><div class="tcy-checkbox-back"><div class="tcy-checkbox-fore"></div></div></label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="options-section-right">
+        <div class="options-section-right-inner">
+            <div id="fancy-0-copy-format-options-preview" class="copy-format-options-preview"></div>
+        </div>
+    </div>
+</div>
+
+            <div class="options-separator"></div>
+            <div class="options-section">
+    <div class="options-section-head">
+        <div class="options-section-head-inner">Second format</div>
+    </div>
+    <div class="options-section-left">
+        <div class="options-section-left-inner">
+            <div>
+                <span class="option-label">Format</span>
+                <select id="fancy-1-copy-format">
+                    <option value="none"></option>
+                    <option value="url"></option>
+                    <option value="compact"></option>
+                    <option value="expanded"></option>
+                    <option value="link"></option>
+                    <option value="markdown"></option>
+                    <option value="bbcode"></option>
+                    <option value="csv"></option>
+                    <option value="json"></option>
+                    <option value="html"></option>
+                    <option value="html-table">HTML </option>
+                    <option value="custom"></option>
+                </select>
+            </div>
+            <div>
+                <div id="fancy-1-compact-options" class="copy-format-suboptions">
+                    <span class="option-label">Separator</span>
+                    <input id="fancy-1-compact-separator" type="text" style="width:50px;">
+                </div>
+                <div id="fancy-1-custom-options" class="copy-format-suboptions">
+                    <div style="display:inline-block;white-space:nowrap;">
+                        <div>
+                            <span class="option-label">Name</span>
+                            <input id="fancy-1-custom-name" type="text" spellcheck="false" style="width:160px;">
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List Start</span>
+                            <input id="fancy-1-custom-start" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab</span>
+                            <input id="fancy-1-custom-tab" type="text" spellcheck="false" style="width:295px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab title</span><span class="token">[title]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url</span><span class="token">[url]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab link</span><span class="token">[link]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab url schema</span><span class="token">[schema]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url host</span><span class="token">[host]</span>
+                                        </div>
+                                        <!--                         <div>
+                            <span>tab url sub-domain</span><span class="token">[sub-domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url domain</span><span class="token">[domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url tld</span><span class="token">[tld]</span>
+                        </div> -->
+                                        <div>
+                                            <span>Tab url path</span><span class="token">[path]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url query</span><span class="token">[query]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url hash</span><span class="token">[hash]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab number</span><span class="token">[#]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab Delimiter</span>
+                            <input id="fancy-1-custom-delimiter" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List End</span>
+                            <input id="fancy-1-custom-end" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fancy-1-html-table-options" class="copy-format-suboptions">
+                    <span class="option-label">Include header</span>
+                    <div class="tcy-checkbox"><input type="checkbox" id="fancy-1-html-table-include-header" name="fancy-1-html-table-include-header" /><label for="fancy-1-html-table-include-header"><div class="tcy-checkbox-back"><div class="tcy-checkbox-fore"></div></div></label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="options-section-right">
+        <div class="options-section-right-inner">
+            <div id="fancy-1-copy-format-options-preview" class="copy-format-options-preview"></div>
+        </div>
+    </div>
+</div>
+
+            <div class="options-separator"></div>
+            <div class="options-section">
+    <div class="options-section-head">
+        <div class="options-section-head-inner">Third format</div>
+    </div>
+    <div class="options-section-left">
+        <div class="options-section-left-inner">
+            <div>
+                <span class="option-label">Format</span>
+                <select id="fancy-2-copy-format">
+                    <option value="none"></option>
+                    <option value="url"></option>
+                    <option value="compact"></option>
+                    <option value="expanded"></option>
+                    <option value="link"></option>
+                    <option value="markdown"></option>
+                    <option value="bbcode"></option>
+                    <option value="csv"></option>
+                    <option value="json"></option>
+                    <option value="html"></option>
+                    <option value="html-table">HTML </option>
+                    <option value="custom"></option>
+                </select>
+            </div>
+            <div>
+                <div id="fancy-2-compact-options" class="copy-format-suboptions">
+                    <span class="option-label">Separator</span>
+                    <input id="fancy-2-compact-separator" type="text" style="width:50px;">
+                </div>
+                <div id="fancy-2-custom-options" class="copy-format-suboptions">
+                    <div style="display:inline-block;white-space:nowrap;">
+                        <div>
+                            <span class="option-label">Name</span>
+                            <input id="fancy-2-custom-name" type="text" spellcheck="false" style="width:160px;">
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List Start</span>
+                            <input id="fancy-2-custom-start" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab</span>
+                            <input id="fancy-2-custom-tab" type="text" spellcheck="false" style="width:295px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab title</span><span class="token">[title]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url</span><span class="token">[url]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab link</span><span class="token">[link]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab url schema</span><span class="token">[schema]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url host</span><span class="token">[host]</span>
+                                        </div>
+                                        <!--                         <div>
+                            <span>tab url sub-domain</span><span class="token">[sub-domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url domain</span><span class="token">[domain]</span>
+                        </div>
+                        <div>
+                            <span>tab url tld</span><span class="token">[tld]</span>
+                        </div> -->
+                                        <div>
+                                            <span>Tab url path</span><span class="token">[path]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url query</span><span class="token">[query]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab url hash</span><span class="token">[hash]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Tab number</span><span class="token">[#]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">Tab Delimiter</span>
+                            <input id="fancy-2-custom-delimiter" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <span class="option-label">List End</span>
+                            <input id="fancy-2-custom-end" type="text" spellcheck="false" style="width:130px;padding-right:40px;">
+                            <div class="legend-box">
+                                <button class="toggle-legend"></button>
+                                <div class="legend">
+                                    <div class="legend-head">Available Tokens</div>
+                                    <div class="legend-body">
+                                        <div>
+                                            <span>Tab count</span><span class="token">[count]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Date</span><span class="token">[date]</span>
+                                        </div>
+                                        <div>
+                                            <span>Time</span><span class="token">[time]</span>
+                                        </div>
+                                        <div>
+                                            <span>Date and time</span><span class="token">[date+time]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Format name</span><span class="token">[format name]</span>
+                                        </div>
+                                        <div class="legend-separator"></div>
+                                        <div>
+                                            <span>Newline character</span><span class="token">[n]</span>
+                                        </div>
+                                        <div>
+                                            <span>Tab character</span><span class="token">[t]</span>
+                                        </div>
+                                        <!-- <div class="close-legend"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fancy-2-html-table-options" class="copy-format-suboptions">
+                    <span class="option-label">Include header</span>
+                    <div class="tcy-checkbox"><input type="checkbox" id="fancy-2-html-table-include-header" name="fancy-2-html-table-include-header" /><label for="fancy-2-html-table-include-header"><div class="tcy-checkbox-back"><div class="tcy-checkbox-fore"></div></div></label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="options-section-right">
+        <div class="options-section-right-inner">
+            <div id="fancy-2-copy-format-options-preview" class="copy-format-options-preview"></div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div style="margin: 45px 0;"></div>
+    </div>
+    <div class="footer">
+        <div id="btn-contribute">
+            <span style="display: inline-block;height: 100%;vertical-align: middle;"></span>
+            <span><img src="img/like.png"></span>
+            <span style="padding-left:20px;"><span style="font-weight:900;">Like this extension?</span>
+            <br><span style="font-weight:100;color:hsla(0,0%,100%,0.7)">Click here!</span></span>
+        </div>
+        <div id="btn-feedback" style="float:right;text-align:right;">
+            <span style="display: inline-block;height: 100%;vertical-align: middle;"></span>
+            <span style="padding-right:20px;"><span style="font-weight:900;">Not so much?</span>
+            <br><span style="font-weight:100;color:hsla(0,0%,100%,0.7)">Tell me how to improve it</span></span>
+            <span><img src="img/meh.png"></span>
+        </div>
+    </div>
+    <script src="util.js"></script>
+    <script src="checkbox.js"></script>
+    <script src="browser.js"></script>
+    <script src="store.js"></script>
+    <script src="app.js"></script>
+    <script src="options.js"></script>
+</body>
+
+</html>

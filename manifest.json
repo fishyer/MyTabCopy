@@ -1,0 +1,35 @@
+{
+   "background": {
+      "page": "bg.html"
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "img/icon19.png",
+         "38": "img/icon38.png"
+      }
+   },
+   "commands": {
+      "copy-tabs": {
+         "description": "Copy tabs",
+         "suggested_key": {
+            "default": "Alt+C"
+         }
+      }
+   },
+   "content_security_policy": "script-src 'self'; object-src 'self'",
+   "description": "Quickly copy tabs to the clipboard",
+   "icons": {
+      "128": "img/icon128.png",
+      "16": "img/icon16.png",
+      "48": "img/icon48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6TOy8wmh3nt4ip9EI0+zgJRD9g5YlI5QJ+t/l/Me1myQd+bA64W0qpqKyLFTIEtq8AwSQ/IwhtOboqXmLnii28rW1oT/OdsMky3rKmciAoShx4hsyZb4kWBEcHMqQ6c+w1Udx7DKYcRynTSsD1kZYpnOC+fc4echcBarpdCsn7QIDAQAC",
+   "manifest_version": 2,
+   "minimum_chrome_version": "43",
+   "name": "MyTabCopy",
+   "optional_permissions": [ "notifications" ],
+   "options_page": "options.html",
+   "permissions": [ "clipboardWrite", "tabs", "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "3.5"
+}

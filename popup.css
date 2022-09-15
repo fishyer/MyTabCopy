@@ -1,0 +1,183 @@
+body {
+    font-family: 'Segoe UI', Tahoma, helvetica, sans-serif;
+    font-size: 15px;
+    margin: 0;
+    /*background-color: hsl(205, 62%, 49%);*/
+    /*background-color: hsl(320, 91%, 39%);*/
+    /*background-color: hsl(320, 91%, 39%);*/
+    /*background-color: hsl(0, 0%, 17%);*/
+    background-color: #000;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
+}
+
+li {}
+
+.head {
+    background-color: hsl(0, 0%, 0%);
+    background-color: hsl(205, 62%, 49%);
+    background-color: hsl(0, 0%, 17%);
+    background-color: hsl(320, 64%, 36%);
+    background-color: hsl(0, 0%, 44%);
+    /*background-color: hsl(320, 70%, 37%);*/
+    background-color: hsl(0, 0%, 28%);
+    color: hsl(0, 0%, 53%);
+    color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 86%);
+    /*color: hsl(320, 64%, 85%);*/
+    padding: 7px 14px;
+    text-align: center;
+    line-height: 23px;
+    position: relative;
+}
+
+.foot {
+    line-height: 23px;
+    padding: 7px 14px;
+}
+
+.action {
+    color: hsl(0, 0%, 73%);
+    color: hsl(0, 0%, 85%);
+    padding: 20px 60px;
+    /*background-color: hsl(205, 62%, 49%);*/
+    /*background-color: hsl(320, 91%, 39%);*/
+    /*background-color: hsl(320, 91%, 39%);*/
+    background-color: hsl(0, 0%, 17%);
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1px;
+}
+
+.action:hover {
+    /*background-color: hsla(0, 0%, 0%, 0.15);*/
+    /*background-color: hsla(0, 100%, 100%, 0.15);*/
+    /*background-color: #000;*/
+    background-color: #0290F3;
+    /*background-color: hsl(320, 91%, 39%);*/
+    color: #fff;
+}
+
+#formats {
+    font-size: 0;
+    width: 100%;
+    /*background-color: hsl(0, 0%, 85%);*/
+    /*background-color: hsl(0, 0%, 35%);*/
+    /*background-color: hsl(0, 0%, 17%);*/
+    /*background-color: hsl(0, 0%, 44%);*/
+    /*background-color: hsl(0, 0%, 0%);*/
+    /*background-color: hsl(205, 76%, 32%);*/
+    /*background-color: hsl(320, 91%, 22%);*/
+    /*background-color: #2B2B2B;*/
+    /*background-color: hsl(200, 88%, 36%);*/
+    background-color: #000;
+}
+
+.format {
+    font-size: 13px;
+    display: inline-block;
+    color: hsl(0, 0%, 17%);
+    color: hsl(0, 0%, 80%);
+    color: hsl(0, 0%, 82%);
+    color: hsl(0, 0%, 100%);
+    color: hsla(0, 100%, 100%, 0.8);
+    line-height: 37px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.format:hover {
+    /*background-color: hsl(0, 0%, 75%);*/
+    /*background-color: hsl(205, 76%, 42%);*/
+    /*background-color: hsl(320, 91%, 29%);*/
+    background-color: hsla(0, 0%, 100%, 0.4);
+    color: hsl(0, 0%, 100%);
+}
+
+
+/*#copy-tabs-in-window {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}*/
+
+
+/*#copy-tab:hover {
+    background-color: hsl(144, 52%, 15%);
+}
+
+#copy-tabs-in-window:hover {
+    background-color: hsl(205, 52%, 19%);
+}*/
+
+.format.format-selected {
+    color: #fff;
+    /*background-color: hsl(205, 72%, 49%);*/
+    /*background-color: hsl(0, 0%, 17%);*/
+    /*background-color: hsl(320, 66%, 25%);*/
+    /*background-color: hsl(320, 64%, 36%);*/
+    /*background-color: hsl(320, 92%, 22%);*/
+    /*background-color: hsl(320, 91%, 39%);*/
+    /*background-color: hsl(205, 80%, 55%);*/
+    background-color: hsla(0, 0%, 100%, 0.3);
+    cursor: default;
+}
+
+.action.disabled {
+    color: hsl(0, 0%, 40%);
+    cursor: default;
+    background-color: inherit;
+    animation-timing-function: ease-in-out;
+    animation-duration: 200ms;
+    animation-iteration-count: 1;
+}
+
+@keyframes nope {
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-10px);
+    }
+    40% {
+        transform: translateX(10px);
+    }
+    60% {
+        transform: translateX(-10px);
+    }
+    80% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/*#open-options {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    font-size: 0;
+    background-image: url(img/options.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#open-options:hover {
+    background-color: hsla(0, 0%, 0%, 0.2);
+    background-color: #222;
+    opacity: 1;
+}
+*/

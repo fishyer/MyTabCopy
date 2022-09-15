@@ -1,0 +1,171 @@
+    .token {
+        font-weight: 500;
+        /*color: hsl(208, 100%, 58%);*/
+        /*color: hsl(0, 0%, 17%);*/
+        /*color: hsl(204, 100%, 60%);*/
+        color: #fff;
+        cursor: pointer;
+        padding: 0 5px;
+        display: inline-block;
+        height: 23px;
+        vertical-align: middle;
+        line-height: 20px;
+    }
+    
+    .token:hover {
+        /*text-decoration: underline;*/
+        background: hsl(205, 100%, 96%);
+        color: hsl(205, 100%, 62%);
+    }
+    
+    .options-section {
+        font-size: 0;
+        text-align: left;
+    }
+    
+    .options-section-left {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+        text-align: right;
+        white-space: nowrap;
+        position: relative;
+    }
+    
+    .options-section-left-inner {
+        padding-right: 25px;
+        display: inline-block;
+        background-color: hsl(0, 0%, 92%);
+    }
+    
+    .options-section-right {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+    }
+    
+    .options-section-right-inner {
+        padding-left: 25px;
+    }
+    
+    .legend-separator {
+        height: 20px;
+    }
+    
+    .copy-format-options-preview {
+        display: inline-block;
+        white-space: pre;
+        font-size: 16px;
+        font-family: monospace;
+        color: hsl(0, 0%, 31%);
+    }
+    
+    .options-separator {
+        margin: 62px 0 10px;
+        background-color: hsl(0, 0%, 71%);
+        height: 1px;
+    }
+    
+    .copy-format-suboptions {
+        display: none;
+        padding-top: 20px;
+    }
+    
+    .legend-box {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        line-height: initial;
+    }
+    
+    .toggle-legend {
+        height: 100%;
+        width: 30px;
+        border: none;
+        padding: 0 10px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: hsla(0, 0%, 0%, 0);
+        color: hsl(0, 0%, 53%);
+        background-image: url(img/info.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        outline: none;
+    }
+    
+    .toggle-legend.toggle-legend-open + .legend {
+        display: inline-block;
+    }
+    /*.toggle-legend:focus,*/
+    
+    .toggle-legend:hover, .toggle-legend:focus {
+        /*background-color: hsl(0, 0%, 94%);*/
+        /*background-color: hsl(205, 100%, 97%);*/
+        background-color: hsl(205, 100%, 70%);
+        background-image: url(img/info2.png);
+    }
+    
+    .toggle-legend.toggle-legend-open {
+        background-image: url(img/x.png);
+        background-color: hsl(205, 100%, 70%);
+    }
+    
+    .legend {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        text-align: left;
+        font-weight: 300;
+        /*color: hsl(0, 0%, 35%);*/
+        /*color: hsl(204, 100%, 59%);*/
+        color: #fff;
+        xbox-shadow: hsl(0, 0%, 75%) 0px 0px 12px 0px;
+        white-space: nowrap;
+        font-size: 16px;
+        display: none;
+        /*background-color: #fff;*/
+        /*background-color: hsl(205, 100%, 97%);*/
+        background-color: hsl(205, 100%, 70%);
+        z-index: 50;
+    }
+    
+    .legend-body {
+        padding: 30px 45px 40px;
+    }
+    
+    .legend.legend-open-top {
+        bottom: 40px;
+        top: initial;
+    }
+    
+    .legend-body > div > span:first-child {
+        display: inline-block;
+        width: 170px;
+    }
+    /*    .close-legend {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        background-image: url(img/x.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    
+   
+    .close-legend:hover {
+        background-color: hsla(0, 0%, 0%, 0.08);
+    }
+*/
+    
+    .legend-head {
+        font-weight: 500;
+        text-align: center;
+        padding: 20px 0;
+        background-color: hsl(205, 100%, 60%);
+        font-weight: 100;
+        text-transform: uppercase;
+    }
