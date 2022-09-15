@@ -22,4 +22,5 @@
 2. 然后用VSCode打开文件夹，修改源码后，再修改一下manifest.json的key和name即可，可以保留原有的插件，两个同时存在
 ![](https://yupic.oss-cn-shanghai.aliyuncs.com/20220915193435.png)
 
-
+## 参考链接
+- [一行代码实现时间格式化—toLocaleString_userkang的博客-CSDN博客](https://blog.csdn.net/userkang/article/details/113381215 ) time: 2022-09-15 19:39:33
