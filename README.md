@@ -5,7 +5,7 @@
 2. 修改了manifest.json的key和name，改名为MyTabCopy
 
 ## 推荐的配置
-[[title]]([url] ) time: [date+time]
+`[[title]]([url] ) time: [date+time]`
 ![](https://yupic.oss-cn-shanghai.aliyuncs.com/20220915192725.png)
 
 
